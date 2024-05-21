@@ -36,16 +36,17 @@ jobs:
         run: |
           curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
           rustup update
-          cargo install --version ${MDBOOK_VERSION} mdbook
+          cargo install --version 0.4.36 mdbook
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with mdBook
         run: mdbook build
+        working-directory: ./book
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./book
+          path: ./book/book
 
   # Deployment job
   deploy:
